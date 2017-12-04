@@ -1,0 +1,21 @@
+﻿<Window x:Class="WPF_UWP_Test1.AddressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_UWP_Test1"
+        mc:Ignorable="d"
+        Title="AddressWindow" Height="300" Width="300" Closing="Window_Closing">
+    <StackPanel>
+        <Label>郵遞區號</Label>
+        <TextBox Name="tbPostcode" Height="25"/>
+        <Label>省/市</Label>
+        <TextBox Name="tbRegion" Height="25"/>
+        <Label>市/鎮</Label>
+        <TextBox Name="tbLocality" Height="25"/>
+        <Label>路/街道地址</Label>
+        <TextBox Name="tbStreetAddress" Height="25"/>
+        <Label>國家/地區</Label>
+        <TextBox Name="tbCountry" Height="25"/>
+    </StackPanel>
+</Window>

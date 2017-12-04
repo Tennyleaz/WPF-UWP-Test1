@@ -1,0 +1,99 @@
+﻿<Window x:Class="WPF_UWP_Test1.NewContactWIndow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_UWP_Test1"
+        mc:Ignorable="d"
+        Title="NewContactWIndow" Height="800" Width="600" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0">
+            <Label>姓</Label>
+            <Label>名</Label>
+            <Label>中間名</Label>
+            <Label>別名</Label>
+            <Label>頭銜</Label>
+            <Label>稱謂</Label>
+            <Label>姓音標</Label>
+            <Label>名音標</Label>
+            
+            <Label>網站</Label>
+            <Label>公司</Label>
+            <Label>職稱</Label>
+            <Label>辦公室位置</Label>
+
+            <Label>配偶</Label>
+            <Label>子女</Label>
+
+            <Label>生日</Label>
+            <Label>紀念日</Label>
+            <Label>記事</Label>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBox Name="tbLName" Height="25"/>
+            <TextBox Name="tbFName" Height="25"/>
+            <TextBox Name="tbMName" Height="25"/>
+            <TextBox Name="tbNickName" Height="25"/>
+            <TextBox Name="tbPrefix" Height="25"/>
+            <TextBox Name="tbSuffix" Height="25"/>
+            <TextBox Name="tbLNamePinyin" Height="25"/>
+            <TextBox Name="tbFNamePinyin" Height="25"/>
+            <TextBox Name="tbWeb" Height="25"/>
+            <TextBox Name="tbCompany" Height="25"/>
+            <TextBox Name="tbPosition" Height="25"/>
+            <TextBox Name="tbOfficeLocation" Height="25"/>
+            <TextBox Name="tbSpause" Height="25"/>
+            <TextBox Name="tbChild" Height="25"/>
+            <DatePicker HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Height="25"
+                        SelectedDateChanged="BirthDatePicker_SelectedDateChanged"/>
+            <DatePicker HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Height="25"
+                        SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+            <TextBox Name="tbNote" Height="50"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2">
+            <Label>行動電話*2</Label>
+            <TextBox Name="tbCellphone1" Height="25"/>
+            <TextBox Name="tbCellphone2" Height="25"/>
+            <Label>住家電話*2</Label>
+            <TextBox Name="tbHomephone1" Height="25"/>
+            <TextBox Name="tbHomephone2" Height="25"/>
+            <Label>工作場所電話*2</Label>
+            <TextBox Name="tbWorkphone1" Height="25"/>
+            <TextBox Name="tbWorkphone2" Height="25"/>
+            <Label>公司電話</Label>
+            <TextBox Name="tbOfficephone" Height="25"/>
+            <Label>呼叫器</Label>
+            <TextBox Name="tbBBCall" Height="25"/>
+            <Label>住家傳真</Label>
+            <TextBox Name="tbHomeFax" Height="25"/>
+            <Label>公司傳真</Label>
+            <TextBox Name="tbOfficeFax" Height="25"/>
+
+            <Label>個人email</Label>
+            <TextBox Name="tbPersonalEmail" Height="25"/>
+            <Label>公司email</Label>
+            <TextBox Name="tbOfficeEmail" Height="25"/>
+            <Label>其他email</Label>
+            <TextBox Name="tbOtherEmail" Height="25"/>
+
+            <Label>公司地址</Label>
+            <Button Name="btnCompanyAddress" Height="25" Content="+" Click="btnCompanyAddress_Click"/>
+            <Label>住家地址</Label>
+            <Button Name="btnHomeAddress" Height="25" Content="+" Click="btnHomeAddress_Click"/>
+            <Label>其他地址</Label>
+            <Button Name="btnOtheryAddress" Height="25" Content="+" Click="btnOtheryAddress_Click"/>
+        </StackPanel>        
+    </Grid>
+</Window>
