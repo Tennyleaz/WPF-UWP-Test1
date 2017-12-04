@@ -58,6 +58,7 @@ namespace WPF_UWP_Test1
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 Console.WriteLine(ex);
             }
         }
@@ -92,7 +93,6 @@ namespace WPF_UWP_Test1
             return listResults;
         }
 
-        private string ID = "test1";
         private async void AddContact(string firstName, string lastName)
         {
             /// https://docs.microsoft.com/en-us/windows/uwp/contacts-and-calendar/integrating-with-contacts
@@ -149,24 +149,83 @@ namespace WPF_UWP_Test1
             await contactList.SaveContactAsync(contact);
         }
 
-        private async void AddContact(Contact c)
+        private async void AddContact(Contact contact)
         {
             ContactStore contactstore = await ContactManager.RequestStoreAsync(ContactStoreAccessType.AllContactsReadWrite);
             IReadOnlyList<ContactList> contactLists = await contactstore.FindContactListsAsync();
 
+            ContactList lists2 = null;
+            //if there is no contact list we create one
+            if (contactLists.Count == 0)
+            {
+                try
+                {
+                    lists2 = await contactstore.CreateContactListAsync("MyList");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("1:\n" + ex.ToString());
+                    Console.WriteLine(ex);
+                }
+            }
+            //otherwise if there is one then we reuse it
+            else
+            {
+                foreach (var c in contactLists)
+                {
+                    if (c.DisplayName == "MyList")
+                    {
+                        lists2 = c;
+                        break;
+                    }
+                }
+                if (lists2 == null)
+                {
+                    try
+                    {
+                        lists2 = await contactstore.CreateContactListAsync("MyList");
+                    }
+                    catch (Exception ex)
+                    {
+                        //MessageBox.Show("2:\n" + ex.ToString());
+                        AddContact2(contact);
+                        return;
+                    }
+                }
+            }
 
-            ContactList lists2 = await contactstore.GetContactListAsync("24,d,d");
             if (lists2 != null)
             {
-                await lists2.SaveContactAsync(c);
+                await lists2.SaveContactAsync(contact);
                 return;
             }
             else
             {
+                MessageBox.Show("cannot find ContactList MyList!");
+            }
+        }
+
+        private async void AddContact2(Contact contact)
+        {
+            ContactStore contactstore = await ContactManager.RequestStoreAsync(ContactStoreAccessType.AppContactsReadWrite);
+            ContactList lists2 = null;
+            try
+            {
                 lists2 = await contactstore.CreateContactListAsync("MyList");
-                await lists2.SaveContactAsync(c);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("3:\n" + ex.ToString());
+                Console.WriteLine(ex);
+            }
+            
+            if (lists2 != null)
+            {
+                await lists2.SaveContactAsync(contact);
                 return;
             }
+            else
+                MessageBox.Show("4:\nAddContact2() list2 is null");
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -189,8 +248,8 @@ namespace WPF_UWP_Test1
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
                 MessageBox.Show(ex.Message);
+                Console.WriteLine(ex);                
             }
         }
 
