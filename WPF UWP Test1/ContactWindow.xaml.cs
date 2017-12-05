@@ -282,6 +282,18 @@ namespace WPF_UWP_Test1
                     thumbnailImage.Freeze();
                     thumbnail.Source = thumbnailImage;
                 }
+                else if (m_contact.SourceDisplayPicture != null)
+                {
+                    IRandomAccessStreamWithContentType thumbnailStream = await m_contact.SourceDisplayPicture.OpenReadAsync();
+                    Stream stream = thumbnailStream.AsStreamForRead();
+                    BitmapImage thumbnailImage = new BitmapImage();
+                    thumbnailImage.BeginInit();
+                    thumbnailImage.StreamSource = stream;
+                    thumbnailImage.CacheOption = BitmapCacheOption.OnLoad;
+                    thumbnailImage.EndInit();
+                    thumbnailImage.Freeze();
+                    thumbnail.Source = thumbnailImage;
+                }
             }
         }
     }

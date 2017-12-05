@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Windows.ApplicationModel.Contacts;
+using Windows.Storage;
 
 namespace WPF_UWP_Test1
 {
@@ -27,7 +28,7 @@ namespace WPF_UWP_Test1
             contact = new Contact();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // name
             contact.FirstName = tbFName.Text;
@@ -120,6 +121,14 @@ namespace WPF_UWP_Test1
             contact.Emails.Add(homemail);
             contact.Emails.Add(workmail);
             contact.Emails.Add(othermail);
+
+            // pic
+            // 還有待研究，猜測因為await關係，必須要等待至檔案讀取完，sampleFile才會存進contact。
+            string path = System.IO.Directory.GetCurrentDirectory();
+            StorageFolder storageFolder = await StorageFolder.GetFolderFromPathAsync(path);
+            StorageFile sampleFile = await storageFolder.GetFileAsync("dog.png");          
+            contact.SourceDisplayPicture = sampleFile;
+            contact.Thumbnail = sampleFile;
         }
 
         private void btnCompanyAddress_Click(object sender, RoutedEventArgs e)

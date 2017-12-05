@@ -232,9 +232,16 @@ namespace WPF_UWP_Test1
         {
             try
             {
-                NewContactWIndow window = new NewContactWIndow();
-                window.ShowDialog();
-                AddContact(window.contact);
+                NewContactWIndow ncw = new NewContactWIndow();
+                ncw.Owner = this;
+                ncw.ShowDialog();
+
+                MessageBox.Show("預覽名片");
+                ContactWindow cw = new ContactWindow(ncw.contact);
+                cw.Owner = this;
+                cw.ShowDialog();
+
+                AddContact(ncw.contact);
                 return;
 
                 string fn = tbName.Text;
@@ -249,7 +256,7 @@ namespace WPF_UWP_Test1
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                Console.WriteLine(ex);                
+                Console.WriteLine(ex);
             }
         }
 
